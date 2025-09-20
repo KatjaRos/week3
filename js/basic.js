@@ -49,7 +49,7 @@ const initializeCode = async ()=> {
             tr.appendChild(tdRate);
             if (rateNumber >= 45){
                 tr.classList.add("over45rate");
-                console.log("Over 45 rate row:", tr, rateNumber);
+                
             }
             else if (rateNumber < 25){
                 tr.classList.add("under25rate");
