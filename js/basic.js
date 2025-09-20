@@ -23,11 +23,13 @@ const initializeCode = async ()=> {
 
     const setupTable = (populationData, employmentData) => {
         const tbody = document.getElementById("tRows");
+        const popLabels = populationData.dimension.Alue.category.label;
+        const popValues = populationData.value;
+        const empValues = employmentData.value;
 
-        Object.entries(populationData.dimension.Alue.category.label)
-        .forEach(([code, name], index) => {
+
+        Object.entries(popLabels).forEach(([code, name], index) => {
             const tr = document.createElement("tr");
-
 
             const tdName = document.createElement("td");
             tdName.textContent = name;
@@ -39,11 +41,11 @@ const initializeCode = async ()=> {
             tr.appendChild(tdPop);
 
             const tdEmp = document.createElement("td");
-            tdEmp.textContent = "-"; 
+            tdEmp.textContent = empValues[index]; 
             tr.appendChild(tdEmp);
 
             const tdRate = document.createElement("td");
-            tdRate.textContent = "-";
+            tdRate.textContent = ((empValues[index] / popValues[index]) * 100).toFixed(1) + "%";;
             tr.appendChild(tdRate);
 
             tbody.appendChild(tr);
