@@ -2,6 +2,9 @@ body {
     font-family: Verdana, Arial, sans-serif;
 
 }
+h1 {
+    text-align: center;
+}
 td {
     padding: 6px;
     border-bottom: 1px solid #808080;
@@ -12,8 +15,21 @@ th {
     padding: 12px 0px 12px 6px;
     border-bottom: 2px solid gray;
 }
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd){
+    background-color: #ffffff;
+}
 table {
     border-collapse: collapse;
     font-size: 16px;
     text-align: left;
+    table-layout: fixed;
+    width: 100%;
+}
+.center {
+    margin: auto;
+    padding: 60px;
+    width: 60%;
 }
