@@ -1,0 +1,56 @@
+const populationURL = "https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/vaerak/statfin_vaerak_pxt_11ra.px";
+const employmentURL = "https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyokay/statfin_tyokay_pxt_115b.px";
+
+const fetchStatFinData = async(url, body)=> {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+    return await response.json();
+};
+
+const initializeCode = async ()=> {
+    const populationBody = await (await fetch("/data/population_query.json")).json();
+    const employmentBody = await (await fetch("/data/employment_query.json")).json();
+
+    const [populationData, employmentData] = await Promise.all([
+        fetchStatFinData(populationURL, populationBody),
+        fetchStatFinData(employmentURL, employmentBody)
+    ]);
+
+    const setupTable = (populationData, employmentData) => {
+        const tbody = document.getElementById("tRows");
+
+        Object.entries(populationData.dimension.Alue.category.label)
+        .forEach(([code, name], index) => {
+            const tr = document.createElement("tr");
+
+
+            const tdName = document.createElement("td");
+            tdName.textContent = name;
+            tr.appendChild(tdName);
+
+
+            const tdPop = document.createElement("td");
+            tdPop.textContent = populationData.value[index];
+            tr.appendChild(tdPop);
+
+            const tdEmp = document.createElement("td");
+            tdEmp.textContent = "-"; 
+            tr.appendChild(tdEmp);
+
+            const tdRate = document.createElement("td");
+            tdRate.textContent = "-";
+            tr.appendChild(tdRate);
+
+            tbody.appendChild(tr);
+        });
+    };
+
+    setupTable(populationData, employmentData);
+};
+
+initializeCode();
