@@ -2,6 +2,18 @@ body {
     font-family: Verdana, Arial, sans-serif;
 
 }
+.center {
+    margin: auto;
+    padding: 60px;
+    width: 60%;
+}
+.over45rate {
+    background-color: #abffbd !important;
+}
+
+.under25rate {
+    background-color: #ff9e9e !important;
+}
 h1 {
     text-align: center;
 }
@@ -21,6 +33,7 @@ tr:nth-child(even) {
 tr:nth-child(odd){
     background-color: #ffffff;
 }
+tr::content
 table {
     border-collapse: collapse;
     font-size: 16px;
@@ -28,8 +41,4 @@ table {
     table-layout: fixed;
     width: 100%;
 }
-.center {
-    margin: auto;
-    padding: 60px;
-    width: 60%;
-}
+

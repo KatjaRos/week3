@@ -43,10 +43,17 @@ const initializeCode = async ()=> {
             const tdEmp = document.createElement("td");
             tdEmp.textContent = empValues[index]; 
             tr.appendChild(tdEmp);
-
+            const rateNumber =  (empValues[index] / popValues[index]) * 100;
             const tdRate = document.createElement("td");
-            tdRate.textContent = ((empValues[index] / popValues[index]) * 100).toFixed(1) + "%";;
+            tdRate.textContent = rateNumber.toFixed(2)+"%";
             tr.appendChild(tdRate);
+            if (rateNumber >= 45){
+                tr.classList.add("over45rate");
+                console.log("Over 45 rate row:", tr, rateNumber);
+            }
+            else if (rateNumber < 25){
+                tr.classList.add("under25rate");
+            }
 
             tbody.appendChild(tr);
         });
